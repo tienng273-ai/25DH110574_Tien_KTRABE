@@ -1,0 +1,141 @@
+﻿@model IEnumerable<_25DH110574_Tien_KTRABE.Models.Order>
+
+@{
+    ViewBag.Title = "Quản lý đơn hàng";
+
+    int currentPage = ViewBag.CurrentPage ?? 1;
+    int totalPages = ViewBag.TotalPages ?? 0;
+}
+
+<h2>QUẢN LÝ ĐƠN HÀNG</h2>
+
+<!-- TÌM KIẾM -->
+<form method="get" action="@Url.Action("Index", "Orders")" class="form-inline" style="margin-bottom:20px;">
+
+    <div class="form-group" style="margin-right:10px;">
+        <label>Tên khách hàng:</label>
+        <input type="text"
+               name="customerName"
+               value="@ViewBag.CustomerName"
+               class="form-control"
+               placeholder="Nhập tên khách hàng" />
+    </div>
+
+    <div class="form-group" style="margin-right:10px;">
+        <label>Trạng thái thanh toán:</label>
+        <input type="text"
+               name="paymentStatus"
+               value="@ViewBag.PaymentStatus"
+               class="form-control"
+               placeholder="Nhập trạng thái" />
+    </div>
+
+    <div class="form-group" style="margin-right:10px;">
+        <label>Ngày đặt:</label>
+        <input type="date"
+               name="orderDate"
+               value="@ViewBag.OrderDate"
+               class="form-control" />
+    </div>
+
+    <button type="submit" class="btn btn-primary">
+        Tìm kiếm
+    </button>
+
+    <a href="@Url.Action("Index", "Orders")"
+       class="btn btn-default">
+        Xóa tìm kiếm
+    </a>
+
+</form>
+
+<!-- DANH SÁCH ĐƠN HÀNG -->
+@if (!Model.Any())
+{
+    <div class="alert alert-warning">
+        KHÔNG CÓ
+    </div>
+}
+else
+{
+    <table class="table table-bordered table-striped">
+        <thead>
+            <tr>
+                <th>Mã đơn hàng</th>
+                <th>Khách hàng</th>
+                <th>Ngày đặt</th>
+                <th>Tổng tiền</th>
+                <th>Trạng thái thanh toán</th>
+                <th>Địa chỉ giao hàng</th>
+                <th>Chi tiết</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@item.OrderID</td>
+
+                    <td>
+                        @(item.Customer != null ? item.Customer.CustomerName : "Không có")
+                    </td>
+
+                    <td>
+                        @item.OrderDate.ToString("dd/MM/yyyy")
+                    </td>
+
+                    <td>
+                        @item.TotalAmount.ToString("N0") VNĐ
+                    </td>
+
+                    <td>
+                        @item.PaymentStatus
+                    </td>
+
+                    <td>
+                        @item.AddressDelivery
+                    </td>
+
+                    <td>
+                        <a href="@Url.Action("DetailedOrder", "Orders", new { id = item.OrderID })"
+                           class="btn btn-primary btn-sm">
+                            Xem
+                        </a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+    <!-- PHÂN TRANG -->
+    if (totalPages > 1)
+    {
+        <div style="text-align:center;">
+
+            @for (int i = 1; i <= totalPages; i++)
+            {
+                if (i == currentPage)
+                {
+                    <span class="btn btn-primary" style="margin:2px;">
+                        @i
+                    </span>
+                }
+                else
+                {
+                    <a class="btn btn-default"
+                       style="margin:2px;"
+                       href="@Url.Action("Index", "Orders", new {
+                           customerName = ViewBag.CustomerName,
+                           paymentStatus = ViewBag.PaymentStatus,
+                           orderDate = ViewBag.OrderDate,
+                           page = i
+                       })">
+                        @i
+                    </a>
+                }
+            }
+
+        </div>
+    }
+}

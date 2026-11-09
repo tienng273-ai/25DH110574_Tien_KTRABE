@@ -1,0 +1,100 @@
+﻿@model _25DH110574_Tien_KTRABE.Models.Order
+
+@{
+    ViewBag.Title = "Chi tiết đơn hàng";
+}
+
+<h2>CHI TIẾT ĐƠN HÀNG</h2>
+
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h4>Thông tin đơn hàng</h4>
+    </div>
+
+    <div class="panel-body">
+        <p><strong>Mã đơn hàng:</strong> @Model.OrderID</p>
+        <p><strong>Khách hàng:</strong> @(Model.Customer != null ? Model.Customer.CustomerName : "Không có")</p>
+        <p><strong>Số điện thoại:</strong> @(Model.Customer != null ? Model.Customer.CustomerPhone : "Không có")</p>
+        <p><strong>Email:</strong> @(Model.Customer != null ? Model.Customer.CustomerEmail : "Không có")</p>
+        <p><strong>Ngày đặt:</strong> @Model.OrderDate.ToString("dd/MM/yyyy")</p>
+        <p><strong>Tổng tiền:</strong> @Model.TotalAmount.ToString("N0") VNĐ</p>
+        <p><strong>Trạng thái thanh toán:</strong> @Model.PaymentStatus</p>
+        <p><strong>Địa chỉ giao hàng:</strong> @Model.AddressDelivery</p>
+    </div>
+</div>
+
+<h3>SẢN PHẨM TRONG ĐƠN HÀNG</h3>
+
+<table class="table table-bordered table-striped">
+    <thead>
+        <tr>
+            <th>Sản phẩm</th>
+            <th>Hình ảnh</th>
+            <th>Số lượng</th>
+            <th>Đơn giá</th>
+            <th>Thành tiền</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        @foreach (var detail in Model.OrderDetails)
+        {
+            <tr>
+                <td>
+                    @(detail.Product != null ? detail.Product.ProductName : "Không có")
+                </td>
+
+                <td>
+                    @if (detail.Product != null && !string.IsNullOrEmpty(detail.Product.ProductImage))
+                    {
+                        <img src="@detail.Product.ProductImage"
+                             style="width:80px;height:80px;object-fit:cover;" />
+                    }
+                </td>
+
+                <td>@detail.Quantity</td>
+
+                <td>@detail.UnitPrice.ToString("N0") VNĐ</td>
+
+                <td>
+                    @((detail.Quantity * detail.UnitPrice).ToString("N0")) VNĐ
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+<form method="post"
+      action="@Url.Action("UpdateStatus", "Orders")"
+      style="margin-top:20px;">
+
+    <input type="hidden" name="id" value="@Model.OrderID" />
+
+    <label>Trạng thái thanh toán:</label>
+
+    <select name="paymentStatus" class="form-control" style="width:300px;">
+        <option value="Chờ thanh toán"
+                @(Model.PaymentStatus == "Chờ thanh toán" ? "selected" : "")>
+            Chờ thanh toán
+        </option>
+
+        <option value="Đã thanh toán"
+                @(Model.PaymentStatus == "Đã thanh toán" ? "selected" : "")>
+            Đã thanh toán
+        </option>
+
+        <option value="Đã huỷ"
+                @(Model.PaymentStatus == "Đã huỷ" ? "selected" : "")>
+            Đã huỷ
+        </option>
+    </select>
+
+    <br />
+
+    <button type="submit" class="btn btn-success">
+        Cập nhật trạng thái
+    </button>
+</form>
+
+<a href="@Url.Action("Index", "Orders")" class="btn btn-default">
+    Quay lại
+</a>
