@@ -1,0 +1,116 @@
+﻿@{
+    ViewBag.Title = "Đăng ký";
+}
+
+<div class="container mt-5">
+
+    <div class="row justify-content-center">
+
+        <div class="col-md-6">
+
+            <div class="card">
+
+                <div class="card-body">
+
+                    <h2 class="text-center mb-4">
+                        Đăng ký tài khoản
+                    </h2>
+
+                    @if (ViewBag.Error != null)
+                    {
+                        <div class="alert alert-danger">
+                            @ViewBag.Error
+                        </div>
+                    }
+
+                    <form method="post"
+                          action="@Url.Action("Register", "Account")">
+
+                        <div class="mb-3">
+                            <label class="form-label">
+                                Tên đăng nhập *
+                            </label>
+
+                            <input type="text"
+                                   name="username"
+                                   class="form-control"
+                                   required />
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label">
+                                Mật khẩu *
+                            </label>
+
+                            <input type="password"
+                                   name="password"
+                                   class="form-control"
+                                   required />
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label">
+                                Họ tên *
+                            </label>
+
+                            <input type="text"
+                                   name="customerName"
+                                   class="form-control"
+                                   required />
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label">
+                                Số điện thoại *
+                            </label>
+
+                            <input type="text"
+                                   name="customerPhone"
+                                   class="form-control"
+                                   required />
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label">
+                                Email
+                            </label>
+
+                            <input type="email"
+                                   name="customerEmail"
+                                   class="form-control" />
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label">
+                                Địa chỉ
+                            </label>
+
+                            <textarea name="customerAddress"
+                                      class="form-control"
+                                      rows="3"></textarea>
+                        </div>
+
+                        <button type="submit"
+                                class="btn btn-primary w-100">
+                            Đăng ký
+                        </button>
+
+                    </form>
+
+                    <div class="text-center mt-3">
+
+                        <a href="@Url.Action("Login", "Account")">
+                            Đã có tài khoản? Đăng nhập
+                        </a>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>

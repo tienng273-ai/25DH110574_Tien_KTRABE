@@ -58,6 +58,7 @@
     <Property Name="ProductImage" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
     <NavigationProperty Name="Category" Relationship="Self.FK_Pro_Category" FromRole="Product" ToRole="Category" />
     <NavigationProperty Name="OrderDetails" Relationship="Self.FK__OrderDeta__Produ__4316F928" FromRole="Product" ToRole="OrderDetail" />
+    <Property Name="Quantity" Type="Int32" Nullable="false" />
   </EntityType>
   <EntityType Name="User">
     <Key>

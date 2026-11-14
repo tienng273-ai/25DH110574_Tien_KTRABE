@@ -1,0 +1,59 @@
+﻿@model _25DH110574_Tien_KTRABE.Models.Product
+
+@{
+    ViewBag.Title = "Chi tiết sản phẩm";
+}
+
+<div class="container mt-4">
+
+    <h2 class="mb-4">Chi tiết sản phẩm</h2>
+
+    <div class="row">
+
+        <div class="col-md-5 text-center">
+
+            @if (!string.IsNullOrEmpty(Model.ProductImage))
+            {
+                <img src="@Url.Content(Model.ProductImage)"
+                     style="max-width:100%; max-height:400px; object-fit:contain;" />
+            }
+            else
+            {
+                <div class="p-5 bg-light">
+                    Không có ảnh
+                </div>
+            }
+
+        </div>
+
+        <div class="col-md-7">
+
+            <h2>@Model.ProductName</h2>
+
+            <p>
+                <strong>Giá:</strong>
+                @Model.ProductPrice.ToString("N0") VNĐ
+            </p>
+
+            <p>
+                <strong>Mô tả:</strong>
+                @Model.ProductDecription
+            </p>
+
+            <p>
+                <strong>Danh mục:</strong>
+                @(Model.Category != null ? Model.Category.CategoryName : "Không có")
+            </p>
+
+            <div class="mt-4">
+                <a href="@Url.Action("MyOrder", "Customer")"
+                   class="btn btn-secondary">
+                    Quay lại đơn hàng
+                </a>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>

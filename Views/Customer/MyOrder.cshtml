@@ -1,0 +1,239 @@
+﻿@model IEnumerable<_25DH110574_Tien_KTRABE.Models.Order>
+
+@{
+    ViewBag.Title = "Đơn hàng của tôi";
+}
+
+<div class="container mt-4">
+
+    <h2 class="mb-4">Đơn hàng của tôi</h2>
+
+   
+
+    <!-- Tìm kiếm -->
+    <form method="get"
+          action="@Url.Action("MyOrder", "Customer")"
+          class="mb-4">
+
+
+        <input type="hidden"
+               name="status"
+               value="@ViewBag.Status" />
+
+        <div class="input-group">
+            <input type="text"
+                   name="search"
+                   value="@ViewBag.Search"
+                   class="form-control"
+                   placeholder="Tìm theo mã đơn hàng hoặc tên sản phẩm..." />
+
+            <button type="submit" class="btn btn-primary">
+                Tìm kiếm
+            </button>
+        </div>
+    </form>
+
+    <!-- Các trạng thái -->
+    <div class="mb-4">
+
+        <a href="@Url.Action("MyOrder", "Customer", new {
+                    customerId = ViewBag.CustomerId,
+                    search = ViewBag.Search
+                })"
+           class="btn btn-outline-primary me-2">
+            Tất cả
+        </a>
+
+        <a href="@Url.Action("MyOrder", "Customer", new {
+                    status = "Chờ thanh toán",
+                    customerId = ViewBag.CustomerId,
+                    search = ViewBag.Search
+                })"
+           class="btn btn-outline-primary me-2">
+            Chờ thanh toán
+        </a>
+
+        <a href="@Url.Action("MyOrder", "Customer", new {
+                    status = "Đang xử lý",
+                    customerId = ViewBag.CustomerId,
+                    search = ViewBag.Search
+                })"
+           class="btn btn-outline-primary me-2">
+            Đang xử lý
+        </a>
+
+        <a href="@Url.Action("MyOrder", "Customer", new {
+                    status = "Đang vận chuyển",
+                    customerId = ViewBag.CustomerId,
+                    search = ViewBag.Search
+                })"
+           class="btn btn-outline-primary me-2">
+            Đang vận chuyển
+        </a>
+
+        <a href="@Url.Action("MyOrder", "Customer", new {
+                    status = "Đã giao",
+                    customerId = ViewBag.CustomerId,
+                    search = ViewBag.Search
+                })"
+           class="btn btn-outline-primary me-2">
+            Đã giao
+        </a>
+
+        <a href="@Url.Action("MyOrder", "Customer", new {
+                    status = "Đã hủy",
+                    customerId = ViewBag.CustomerId,
+                    search = ViewBag.Search
+                })"
+           class="btn btn-outline-primary">
+            Đã hủy
+        </a>
+
+    </div>
+
+    <!-- Danh sách đơn hàng -->
+    @if (Model != null && Model.Any())
+    {
+        foreach (var order in Model)
+        {
+            <div class="card mb-4">
+
+                <div class="card-header">
+                    <div class="d-flex justify-content-between">
+
+                        <strong>
+                            Mã đơn hàng: #@order.OrderID
+                        </strong>
+
+                        <span>
+                            @order.PaymentStatus
+                        </span>
+
+                    </div>
+                </div>
+
+                <div class="card-body">
+
+                    <p>
+                        <strong>Ngày đặt:</strong>
+                        @order.OrderDate.ToString("dd/MM/yyyy HH:mm")
+                    </p>
+
+                    @foreach (var detail in order.OrderDetails)
+                    {
+                        <div class="row border-top pt-3 mt-3">
+
+                            <!-- Ảnh -->
+                            <div class="col-md-2">
+
+                                @if (detail.Product != null &&
+                                     !string.IsNullOrEmpty(detail.Product.ProductImage))
+                                {
+                                    <img src="@Url.Content(detail.Product.ProductImage)"
+                                         style="width:100px;height:100px;object-fit:cover;" />
+                                }
+                                else
+                                {
+                                    <div style="width:100px;height:100px;background:#eee;
+                                                display:flex;align-items:center;
+                                                justify-content:center;">
+                                        Không có ảnh
+                                    </div>
+                                }
+
+                            </div>
+
+                            <!-- Thông tin sản phẩm -->
+                            <div class="col-md-6">
+
+                                @if (detail.Product != null)
+                                {
+                                    <h5>
+                                        @detail.Product.ProductName
+                                    </h5>
+                                }
+
+                                <p>
+                                    Số lượng: @detail.Quantity
+                                </p>
+
+                                <p>
+                                    Đơn giá:
+                                    @detail.UnitPrice.ToString("N0") VNĐ
+                                </p>
+
+                            </div>
+
+                            <!-- Nút -->
+                            <div class="col-md-4 text-end">
+
+                                @if (detail.Product != null)
+                                {
+                                    <a href="@Url.Action("ProductDetail", "Customer",
+                                                new { id = detail.Product.ProductID })"
+                                       class="btn btn-outline-primary">
+                                        Xem chi tiết
+                                    </a>
+
+                                    <a href="@Url.Action("BuyAgain", "Customer",
+                                                new { id = detail.Product.ProductID })"
+                                       class="btn btn-primary">
+                                        Mua lại
+                                    </a>
+                                }
+
+                            </div>
+
+                        </div>
+                    }
+
+                    <!-- Tổng tiền -->
+                    <div class="text-end border-top mt-3 pt-3">
+
+                        <strong>
+                            Tổng tiền:
+                            @order.TotalAmount.ToString("N0") VNĐ
+                        </strong>
+
+                    </div>
+
+                </div>
+            </div>
+        }
+
+        <!-- Xem thêm -->
+        if (ViewBag.HasMore == true && ViewBag.XemThem != true)
+        {
+            <div class="text-center mb-4">
+
+                <a href="@Url.Action("MyOrder", "Customer", new {
+                            search = ViewBag.Search,
+                            status = ViewBag.Status,
+                            customerId = ViewBag.CustomerId,
+                            xemThem = true
+                        })"
+                   class="btn btn-outline-primary">
+                    Xem thêm
+                </a>
+
+            </div>
+        }
+    }
+    else
+    {
+        <!-- Không có đơn hàng -->
+        <div class="text-center mt-5">
+
+            <h5>
+                BẠN CHƯA CÓ ĐƠN HÀNG NÀO. HÃY ĐẶT ĐƠN NGAY.
+            </h5>
+
+            <a href="@Url.Action("Index", "Home")"
+               class="btn btn-primary mt-3">
+                Về trang Home
+            </a>
+
+        </div>
+    }
+
+</div>
