@@ -130,6 +130,7 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\CartController.cs" />
     <Compile Include="Controllers\CustomerController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -189,7 +190,15 @@
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\bootstrap.rtl.css" />
     <Content Include="Content\bootstrap.rtl.min.css" />
+    <Content Include="Content\Images\Cap3Dau.jpg" />
+    <Content Include="Content\Images\DayLightning.jpg" />
+    <Content Include="Content\Images\DayTypeC.jpg" />
     <Content Include="Content\Images\iphone15.png" />
+    <Content Include="Content\Images\JBLWaveBeam.jpg" />
+    <Content Include="Content\Images\SacDuPhong.jpg" />
+    <Content Include="Content\Images\SacNhanh.jpg" />
+    <Content Include="Content\Images\TaiNgheCoDay.jpg" />
+    <Content Include="Content\Images\TWS.jpg" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
@@ -249,6 +258,8 @@
     <Content Include="Views\Account\Login.cshtml" />
     <Content Include="Views\Account\Register.cshtml" />
     <Content Include="Views\Account\Edit.cshtml" />
+    <Content Include="Views\Admin\Index.cshtml" />
+    <Content Include="Views\Shared\_AdminLayout.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

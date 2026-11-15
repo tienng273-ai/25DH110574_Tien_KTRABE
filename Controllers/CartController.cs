@@ -32,6 +32,41 @@ namespace _25DH110574_Tien_KTRABE.Controllers
         }
 
         // Tăng số lượng
+        public ActionResult Add(int id)
+        {
+            var product = db.Products.FirstOrDefault(p => p.ProductID == id);
+
+            if (product == null)
+                return HttpNotFound();
+
+            if (product.Quantity <= 0)
+            {
+                TempData["CartMessage"] = "Sản phẩm đã hết hàng.";
+                return RedirectToAction("Index", "Home");
+            }
+
+            var cart = Session["Cart"] as Dictionary<int, int>;
+
+            if (cart == null)
+                cart = new Dictionary<int, int>();
+
+            if (!cart.ContainsKey(id))
+            {
+                cart[id] = 1;
+            }
+            else if (cart[id] < product.Quantity)
+            {
+                cart[id]++;
+            }
+            else
+            {
+                TempData["CartMessage"] = "Số lượng sản phẩm đã đạt tối đa tồn kho.";
+            }
+
+            Session["Cart"] = cart;
+
+            return RedirectToAction("Index", "Home");
+        }
         public ActionResult Increase(int id)
         {
             var product = db.Products.FirstOrDefault(p => p.ProductID == id);

@@ -1,29 +1,60 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+﻿using System.Linq;
 using System.Web.Mvc;
+using _25DH110574_Tien_KTRABE.Models;
 
 namespace _25DH110574_Tien_KTRABE.Controllers
 {
     public class HomeController : Controller
     {
-        public ActionResult Index()
+        private MyStoreEntities1 db = new MyStoreEntities1();
+
+        public ActionResult Index(string category)
         {
-            return View();
+            var products = db.Products
+                .Include("Category")
+                .AsQueryable();
+
+            // Lọc sản phẩm theo danh mục
+            if (category == "tainghe")
+            {
+                products = products.Where(p =>
+                    p.ProductName.Contains("Tai nghe") ||
+                    p.ProductName.Contains("JBL"));
+            }
+            else if (category == "sacpin")
+            {
+                products = products.Where(p =>
+                    p.ProductName.Contains("Sạc") ||
+                    p.ProductName.Contains("Pin"));
+            }
+            else if (category == "capsac")
+            {
+                products = products.Where(p =>
+                    p.ProductName.Contains("Dây sạc") ||
+                    p.ProductName.Contains("Cáp"));
+            }
+            else if (category == "dienthoai")
+            {
+                products = products.Where(p =>
+                    p.ProductName.Contains("iPhone") ||
+                    (p.Category != null &&
+                     p.Category.CategoryName.Contains("Điện thoại")));
+            }
+
+            ViewBag.Category = category;
+
+            return View(products.ToList());
         }
 
         public ActionResult About()
         {
             ViewBag.Message = "Your application description page.";
-
             return View();
         }
 
         public ActionResult Contact()
         {
-            ViewBag.Message = "Your contact page.";
-
+            ViewBag.Message = "Your application contact page.";
             return View();
         }
     }

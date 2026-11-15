@@ -36,20 +36,30 @@ namespace _25DH110574_Tien_KTRABE.Controllers
                 return View();
             }
 
+            // Lưu thông tin đăng nhập
+            Session["Username"] = user.Username;
+            Session["UserRole"] = user.UserRole;
+
+            // Nếu là Admin
+            if (user.UserRole == "A")
+            {
+                return RedirectToAction("Index", "Admin");
+            }
+
+            // Nếu là Customer thì tìm thông tin Customer
             var customer = db.Customers.FirstOrDefault(c =>
                 c.Username == user.Username);
 
             if (customer == null)
             {
+                Session.Clear();
+
                 ViewBag.Error = "Không tìm thấy thông tin khách hàng.";
                 return View();
             }
 
-            // Lưu thông tin đăng nhập vào Session
-            Session["Username"] = user.Username;
             Session["CustomerID"] = customer.CustomerID;
             Session["CustomerName"] = customer.CustomerName;
-            Session["UserRole"] = user.UserRole;
 
             return RedirectToAction("Index", "Home");
         }

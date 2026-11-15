@@ -3,8 +3,8 @@
   "WorkspaceRootPath": "C:\\Users\\ASUS\\OneDrive\\Documents\\LTW_cuoiky\\25DH110574_Tien_KTRABE\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{BC939CCD-43C0-49AC-9A11-F90B7DCE2554}|25DH110574_Tien_KTRABE.csproj|c:\\users\\asus\\onedrive\\documents\\ltw_cuoiky\\25dh110574_tien_ktrabe\\views\\cart\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{BC939CCD-43C0-49AC-9A11-F90B7DCE2554}|25DH110574_Tien_KTRABE.csproj|solutionrelative:views\\cart\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+      "AbsoluteMoniker": "D:0:0:{BC939CCD-43C0-49AC-9A11-F90B7DCE2554}|25DH110574_Tien_KTRABE.csproj|c:\\users\\asus\\onedrive\\documents\\ltw_cuoiky\\25dh110574_tien_ktrabe\\content\\site.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}",
+      "RelativeMoniker": "D:0:0:{BC939CCD-43C0-49AC-9A11-F90B7DCE2554}|25DH110574_Tien_KTRABE.csproj|solutionrelative:content\\site.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}"
     }
   ],
   "DocumentGroupContainers": [
@@ -19,14 +19,14 @@
             {
               "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "Index.cshtml",
-              "DocumentMoniker": "C:\\Users\\ASUS\\OneDrive\\Documents\\LTW_cuoiky\\25DH110574_Tien_KTRABE\\Views\\Cart\\Index.cshtml",
-              "RelativeDocumentMoniker": "Views\\Cart\\Index.cshtml",
-              "ToolTip": "C:\\Users\\ASUS\\OneDrive\\Documents\\LTW_cuoiky\\25DH110574_Tien_KTRABE\\Views\\Cart\\Index.cshtml",
-              "RelativeToolTip": "Views\\Cart\\Index.cshtml",
-              "ViewState": "AgIAAGUAAAAAAAAAAAAAwJIAAAAGAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2026-11-14T18:03:54.872Z",
+              "Title": "Site.css",
+              "DocumentMoniker": "C:\\Users\\ASUS\\OneDrive\\Documents\\LTW_cuoiky\\25DH110574_Tien_KTRABE\\Content\\Site.css",
+              "RelativeDocumentMoniker": "Content\\Site.css",
+              "ToolTip": "C:\\Users\\ASUS\\OneDrive\\Documents\\LTW_cuoiky\\25DH110574_Tien_KTRABE\\Content\\Site.css",
+              "RelativeToolTip": "Content\\Site.css",
+              "ViewState": "AgIAAAMBAAAAAAAAAAAwwCYBAAAFAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003000|",
+              "WhenOpened": "2026-11-15T11:06:07.171Z",
               "EditorCaption": ""
             }
           ]
