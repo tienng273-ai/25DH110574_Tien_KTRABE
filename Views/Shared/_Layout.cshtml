@@ -18,7 +18,7 @@
 
             <!-- Logo -->
             @Html.ActionLink(
-                     "MyStore",
+                     "MyStore ",
                      "Index",
                      "Home",
                      new { area = "" },
@@ -154,4 +154,9 @@
     @RenderSection("scripts", required: false)
 
 </body>
+@{
+    var cart = Session["Cart"] as Dictionary<int, int>;
+    int cartCount = cart != null ? cart.Values.Sum() : 0;
+}
+
 </html>

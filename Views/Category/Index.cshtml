@@ -1,0 +1,67 @@
+﻿@model IEnumerable<_25DH110574_Tien_KTRABE.Models.Category>
+
+@{
+    ViewBag.Title = "Quản lý danh mục";
+}
+
+<div class="container mt-4">
+
+    <h2>QUẢN LÝ DANH MỤC</h2>
+
+    <p>
+        @Html.ActionLink(
+                 "➕ Thêm danh mục",
+                 "Create",
+                 null,
+                 new { @class = "btn btn-primary" }
+             )
+    </p>
+
+    <table class="table table-bordered table-striped">
+
+        <thead>
+            <tr>
+                <th>Mã danh mục</th>
+                <th>Tên danh mục</th>
+                <th>Thao tác</th>
+            </tr>
+        </thead>
+
+        <tbody>
+
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@item.CategoryID</td>
+
+                    <td>
+                        @item.CategoryName
+                    </td>
+
+                    <td>
+                        @Html.ActionLink(
+                                 "Sửa",
+                                 "Edit",
+                                 new { id = item.CategoryID },
+                                 new { @class = "btn btn-warning btn-sm" }
+                             )
+
+                        @Html.ActionLink(
+                                 "Xóa",
+                                 "Delete",
+                                 new { id = item.CategoryID },
+                                 new
+                                 {
+                                     @class = "btn btn-danger btn-sm",
+                                     onclick = "return confirm('Bạn có chắc muốn xóa danh mục này không?');"
+                                 }
+                             )
+                    </td>
+                </tr>
+            }
+
+        </tbody>
+
+    </table>
+
+</div>

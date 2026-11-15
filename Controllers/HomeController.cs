@@ -10,9 +10,7 @@ namespace _25DH110574_Tien_KTRABE.Controllers
 
         public ActionResult Index(string category)
         {
-            var products = db.Products
-                .Include("Category")
-                .AsQueryable();
+            var products = db.Products.Include("Category").Where(p => p.Quantity > 0).AsQueryable();
 
             // Lọc sản phẩm theo danh mục
             if (category == "tainghe")

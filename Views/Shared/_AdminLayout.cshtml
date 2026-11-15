@@ -39,22 +39,32 @@
 
                     <li class="nav-item">
                         @Html.ActionLink(
-                                 "Trang chủ Admin",
-                                 "Index",
-                                 "Admin",
-                                 new { },
-                                 new { @class = "nav-link" }
-                             )
+                                      "Trang chủ Admin",
+                                      "Index",
+                                      "Admin",
+                                      new { },
+                                      new { @class = "nav-link" }
+                                  )
                     </li>
 
                     <li class="nav-item">
                         @Html.ActionLink(
-                                 "Quản lý đơn hàng",
-                                 "Index",
-                                 "Orders",
-                                 new { },
-                                 new { @class = "nav-link" }
-                             )
+                                      "Quản lý đơn hàng",
+                                      "Index",
+                                      "Orders",
+                                      new { },
+                                      new { @class = "nav-link" }
+                                  )
+                    </li>
+
+                    <li class="nav-item">
+                        @Html.ActionLink(
+                                "Quản lý danh mục",
+                                "Index",
+                                "Category",
+                                new { },
+                                new { @class = "nav-link" }
+                            )
                     </li>
 
                 </ul>
