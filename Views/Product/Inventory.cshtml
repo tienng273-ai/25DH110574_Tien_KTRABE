@@ -1,0 +1,62 @@
+﻿@model IEnumerable<_25DH110574_Tien_KTRABE.Models.Product>
+
+@{
+    ViewBag.Title = "Quản lý tồn kho";
+}
+
+<div class="container mt-4">
+
+    <h2>QUẢN LÝ TỒN KHO</h2>
+
+    <h4 class="mt-4">📦 Danh sách sản phẩm tồn kho</h4>
+
+    <table class="table table-bordered table-striped">
+        <thead>
+            <tr>
+                <th>Mã SP</th>
+                <th>Tên sản phẩm</th>
+                <th>Danh mục</th>
+                <th>Số lượng</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            @foreach (var item in Model.Where(p => p.Quantity > 5))
+            {
+                <tr>
+                    <td>@item.ProductID</td>
+                    <td>@item.ProductName</td>
+                    <td>@(item.Category != null ? item.Category.CategoryName : "Không có")</td>
+                    <td>@item.Quantity</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+
+    <h4 class="mt-5">⚠️ Danh sách sản phẩm cần nhập thêm</h4>
+
+    <table class="table table-bordered table-striped">
+        <thead>
+            <tr>
+                <th>Mã SP</th>
+                <th>Tên sản phẩm</th>
+                <th>Danh mục</th>
+                <th>Số lượng còn lại</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            @foreach (var item in Model.Where(p => p.Quantity <= 5))
+            {
+                <tr>
+                    <td>@item.ProductID</td>
+                    <td>@item.ProductName</td>
+                    <td>@(item.Category != null ? item.Category.CategoryName : "Không có")</td>
+                    <td>@item.Quantity</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+</div>

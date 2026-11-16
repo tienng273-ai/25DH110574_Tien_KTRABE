@@ -146,6 +146,10 @@
     <Compile Include="Models\Customer.cs">
       <DependentUpon>MyStoreModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\Metadata\CategoryMetadata.cs" />
+    <Compile Include="Models\Metadata\CategoryPartial.cs" />
+    <Compile Include="Models\Metadata\ProductMetadata.cs" />
+    <Compile Include="Models\Metadata\ProductPartial.cs" />
     <Compile Include="Models\MyStoreModel.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -267,6 +271,9 @@
     <Content Include="Views\Category\Edit.cshtml" />
     <Content Include="Views\Product\Index.cshtml" />
     <Content Include="Views\Product\Create.cshtml" />
+    <Content Include="Views\Product\Edit.cshtml" />
+    <Content Include="Views\Product\Details.cshtml" />
+    <Content Include="Views\Product\Inventory.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
