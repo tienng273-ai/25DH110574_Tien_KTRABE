@@ -9,6 +9,29 @@ namespace _25DH110574_Tien_KTRABE.Controllers
     {
         private MyStoreEntities1 db = new MyStoreEntities1();
 
+        public ActionResult Index()
+        {
+            var customers = db.Customers
+                .OrderBy(c => c.CustomerID)
+                .ToList();
+
+            return View(customers);
+        }
+
+        public ActionResult Details(int id)
+        {
+            var customer = db.Customers
+                .Include("Orders.OrderDetails.Product")
+                .FirstOrDefault(c => c.CustomerID == id);
+
+            if (customer == null)
+            {
+                return HttpNotFound();
+            }
+
+            return View(customer);
+        }
+
         public ActionResult MyOrder(string search, string status, bool xemThem = false)
         {
             if (Session["CustomerID"] == null)

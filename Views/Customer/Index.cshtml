@@ -1,0 +1,45 @@
+﻿@model IEnumerable<_25DH110574_Tien_KTRABE.Models.Customer>
+
+@{
+    ViewBag.Title = "Quản lý khách hàng";
+}
+
+<div class="container mt-4">
+
+    <h2>QUẢN LÝ KHÁCH HÀNG</h2>
+
+    <table class="table table-bordered table-striped mt-4">
+        <thead>
+            <tr>
+                <th>Mã KH</th>
+                <th>Tên khách hàng</th>
+                <th>Số điện thoại</th>
+                <th>Email</th>
+                <th>Địa chỉ</th>
+                <th>Thao tác</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@item.CustomerID</td>
+                    <td>@item.CustomerName</td>
+                    <td>@item.CustomerPhone</td>
+                    <td>@item.CustomerEmail</td>
+                    <td>@item.CustomerAddress</td>
+                    <td>
+                        @Html.ActionLink(
+                                 "Chi tiết",
+                                 "Details",
+                                 new { id = item.CustomerID },
+                                 new { @class = "btn btn-info btn-sm" }
+                             )
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+</div>
