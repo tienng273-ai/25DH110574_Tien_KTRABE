@@ -1,0 +1,58 @@
+﻿@model _25DH110574_Tien_KTRABE.Models.User
+
+@{
+    ViewBag.Title = "Sửa tài khoản";
+}
+
+<div class="container mt-4">
+
+    <h2>SỬA TÀI KHOẢN</h2>
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        @Html.HiddenFor(m => m.Username)
+
+        <div class="form-group">
+            <label>Tên đăng nhập</label>
+            <input type="text"
+                   class="form-control"
+                   value="@Model.Username"
+                   readonly />
+        </div>
+
+        <div class="form-group mt-3">
+            @Html.LabelFor(m => m.Password)
+            @Html.PasswordFor(m => m.Password, new { @class = "form-control" })
+            @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
+        </div>
+
+        <div class="form-group mt-3">
+            @Html.LabelFor(m => m.UserRole)
+            @Html.DropDownListFor(
+                     m => m.UserRole,
+                     new SelectList(new[]
+                     {
+                    new { Value = "A", Text = "Admin" },
+                    new { Value = "C", Text = "Customer" }
+                         }, "Value", "Text", Model.UserRole),
+                     "-- Chọn vai trò --",
+                     new { @class = "form-control" }
+                 )
+            @Html.ValidationMessageFor(m => m.UserRole, "", new { @class = "text-danger" })
+        </div>
+
+        <br />
+
+        <button type="submit" class="btn btn-primary">Lưu</button>
+
+        @Html.ActionLink(
+                 "Quay lại",
+                 "Index",
+                 null,
+                 new { @class = "btn btn-secondary" }
+             )
+    }
+
+</div>

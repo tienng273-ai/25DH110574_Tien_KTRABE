@@ -39,39 +39,49 @@
 
                     <li class="nav-item">
                         @Html.ActionLink(
-                                                     "Trang chủ Admin",
-                                                     "Index",
-                                                     "Admin",
-                                                     new { },
-                                                     new { @class = "nav-link" }
-                                                 )
+                                                          "Trang chủ Admin",
+                                                          "Index",
+                                                          "Admin",
+                                                          new { },
+                                                          new { @class = "nav-link" }
+                                                      )
                     </li>
 
                     <li class="nav-item">
                         @Html.ActionLink(
-                                                     "Quản lý đơn hàng",
-                                                     "Index",
-                                                     "Orders",
-                                                     new { },
-                                                     new { @class = "nav-link" }
-                                                 )
+                                                          "Quản lý đơn hàng",
+                                                          "Index",
+                                                          "Orders",
+                                                          new { },
+                                                          new { @class = "nav-link" }
+                                                      )
                     </li>
 
                     <li class="nav-item">
                         @Html.ActionLink(
-                                               "Quản lý danh mục",
-                                               "Index",
-                                               "Category",
-                                               new { },
-                                               new { @class = "nav-link" }
-                                           )
+                                                    "Quản lý danh mục",
+                                                    "Index",
+                                                    "Category",
+                                                    new { },
+                                                    new { @class = "nav-link" }
+                                                )
                     </li>
 
                     <li>
                         @Html.ActionLink(
-                                     "Quản lý sản phẩm",
+                                          "Quản lý sản phẩm",
+                                          "Index",
+                                          "Product",
+                                          new { area = "" },
+                                          null
+                                      )
+                    </li>
+
+                    <li>
+                        @Html.ActionLink(
+                                     "Quản lý khách hàng",
                                      "Index",
-                                     "Product",
+                                     "Customer",
                                      new { area = "" },
                                      null
                                  )
@@ -79,9 +89,9 @@
 
                     <li>
                         @Html.ActionLink(
-                                "Quản lý khách hàng",
+                                "Quản lý tài khoản",
                                 "Index",
-                                "Customer",
+                                "User",
                                 new { area = "" },
                                 null
                             )
@@ -89,12 +99,12 @@
 
                     <li>
                         @Html.ActionLink(
-                                     "Quản lý tồn kho",
-                                     "Inventory",
-                                     "Product",
-                                     new { area = "" },
-                                     null
-                                 )
+                                          "Quản lý tồn kho",
+                                          "Inventory",
+                                          "Product",
+                                          new { area = "" },
+                                          null
+                                      )
                     </li>
 
                 </ul>

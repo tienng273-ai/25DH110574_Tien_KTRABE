@@ -157,13 +157,25 @@ namespace _25DH110574_Tien_KTRABE.Controllers
             return View(product);
         }
 
-        public ActionResult BuyAgain(int id)
+        [HttpPost]
+        public ActionResult BuyAgain(int id, int quantity)
         {
             var product = db.Products.FirstOrDefault(p => p.ProductID == id);
 
             if (product == null)
             {
                 return HttpNotFound();
+            }
+
+            if (quantity <= 0)
+            {
+                quantity = 1;
+            }
+
+            if (quantity > product.Quantity)
+            {
+                TempData["Error"] = "Số lượng mua vượt quá số lượng tồn kho.";
+                return RedirectToAction("ProductDetail", new { id = id });
             }
 
             var cart = Session["Cart"] as Dictionary<int, int>;
@@ -173,8 +185,7 @@ namespace _25DH110574_Tien_KTRABE.Controllers
                 cart = new Dictionary<int, int>();
             }
 
-            // Mua lại luôn thêm sản phẩm với số lượng = 1
-            cart[id] = 1;
+            cart[id] = quantity;
 
             Session["Cart"] = cart;
 

@@ -46,10 +46,40 @@
             </p>
 
             <div class="mt-4">
-                <a href="@Url.Action("MyOrder", "Customer")"
+
+                @if (Model.Quantity > 0)
+                {
+                    using (Html.BeginForm("BuyAgain", "Customer", new { id = Model.ProductID }, FormMethod.Post))
+                    {
+                        <div class="mb-3">
+                            <label><strong>Số lượng mua:</strong></label>
+
+                            <input type="number"
+                                   name="quantity"
+                                   value="1"
+                                   min="1"
+                                   max="@Model.Quantity"
+                                   class="form-control"
+                                   style="width:150px;" />
+                        </div>
+
+                        <button type="submit" class="btn btn-success">
+                            🛒 Mua sản phẩm
+                        </button>
+                    }
+                }
+                else
+                {
+                    <button type="button" class="btn btn-secondary" disabled>
+                        Hết hàng
+                    </button>
+                }
+
+                <a href="@Url.Action("Index", "Home")"
                    class="btn btn-secondary">
-                    Quay lại đơn hàng
+                    Quay lại
                 </a>
+
             </div>
 
         </div>
