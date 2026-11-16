@@ -1,0 +1,61 @@
+﻿@model IEnumerable<_25DH110574_Tien_KTRABE.Models.Order>
+
+@{
+    ViewBag.Title = "Lịch sử giao dịch";
+}
+
+<div class="container mt-4">
+
+    <h2>LỊCH SỬ GIAO DỊCH</h2>
+
+    @if (Model != null && Model.Any())
+    {
+        <table class="table table-bordered table-striped mt-4">
+            <thead>
+                <tr>
+                    <th>Mã đơn</th>
+                    <th>Ngày mua</th>
+                    <th>Tổng tiền</th>
+                    <th>Trạng thái</th>
+                    <th>Thao tác</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                @foreach (var order in Model)
+                {
+                    <tr>
+                        <td>@order.OrderID</td>
+
+                        <td>
+                            @order.OrderDate.ToString("dd/MM/yyyy HH:mm")
+                        </td>
+
+                        <td>
+                            @order.TotalAmount.ToString("N0") VNĐ
+                        </td>
+
+                        <td>
+                            @order.PaymentStatus
+                        </td>
+
+                        <td>
+                            <a href="@Url.Action("OrderDetail", "Customer",
+                                new { id = order.OrderID })"
+                               class="btn btn-info btn-sm">
+                                Chi tiết
+                            </a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+    else
+    {
+        <div class="alert alert-info mt-4">
+            Bạn chưa có giao dịch nào.
+        </div>
+    }
+
+</div>

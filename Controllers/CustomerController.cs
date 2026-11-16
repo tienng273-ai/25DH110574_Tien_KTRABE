@@ -9,6 +9,22 @@ namespace _25DH110574_Tien_KTRABE.Controllers
     {
         private MyStoreEntities1 db = new MyStoreEntities1();
 
+        public ActionResult TransactionHistory()
+        {
+            if (Session["CustomerID"] == null)
+            {
+                return RedirectToAction("Login", "Account");
+            }
+
+            int customerId = (int)Session["CustomerID"];
+
+            var orders = db.Orders
+                .Where(o => o.CustomerID == customerId)
+                .OrderByDescending(o => o.OrderDate)
+                .ToList();
+
+            return View(orders);
+        }
         public ActionResult Index()
         {
             var customers = db.Customers
@@ -16,6 +32,30 @@ namespace _25DH110574_Tien_KTRABE.Controllers
                 .ToList();
 
             return View(customers);
+        }
+
+        public ActionResult OrderDetail(int id)
+        {
+            if (Session["CustomerID"] == null)
+            {
+                return RedirectToAction("Login", "Account");
+            }
+
+            int customerId = (int)Session["CustomerID"];
+
+            var order = db.Orders
+                .Include("Customer")
+                .Include("OrderDetails.Product")
+                .FirstOrDefault(o =>
+                    o.OrderID == id &&
+                    o.CustomerID == customerId);
+
+            if (order == null)
+            {
+                return HttpNotFound();
+            }
+
+            return View(order);
         }
 
         public ActionResult Details(int id)

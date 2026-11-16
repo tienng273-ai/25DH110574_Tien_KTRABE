@@ -75,35 +75,47 @@
                     {
                         <li class="nav-item">
                             @Html.ActionLink(
-                                               "Đăng nhập",
-                                               "Login",
-                                               "Account",
-                                               new { },
-                                               new { @class = "nav-link" }
-                                           )
+                                                    "Đăng nhập",
+                                                    "Login",
+                                                    "Account",
+                                                    new { },
+                                                    new { @class = "nav-link" }
+                                                )
                         </li>
 
                         <li class="nav-item">
                             @Html.ActionLink(
-                                               "Đăng ký",
-                                               "Register",
-                                               "Account",
-                                               new { },
-                                               new { @class = "nav-link" }
-                                           )
+                                                    "Đăng ký",
+                                                    "Register",
+                                                    "Account",
+                                                    new { },
+                                                    new { @class = "nav-link" }
+                                                )
                         </li>
                     }
                     else
                     {
                         <li class="nav-item">
                             @Html.ActionLink(
-                                               "Tài khoản",
-                                               "Edit",
-                                               "Account",
-                                               new { },
-                                               new { @class = "nav-link" }
-                                           )
+                                                    "Tài khoản",
+                                                    "Edit",
+                                                    "Account",
+                                                    new { },
+                                                    new { @class = "nav-link" }
+                                                )
                         </li>
+
+
+                        <li class="nav-item">
+                            @Html.ActionLink(
+                                    "Lịch sử giao dịch",
+                                    "TransactionHistory",
+                                    "Customer",
+                                    new { },
+                                    new { @class = "nav-link" }
+                                )
+                        </li>
+
 
                         <li class="nav-item">
                             <span class="nav-link text-light">
@@ -113,12 +125,12 @@
 
                         <li class="nav-item">
                             @Html.ActionLink(
-                                               "Đăng xuất",
-                                               "Logout",
-                                               "Account",
-                                               new { },
-                                               new { @class = "nav-link" }
-                                           )
+                                                    "Đăng xuất",
+                                                    "Logout",
+                                                    "Account",
+                                                    new { },
+                                                    new { @class = "nav-link" }
+                                                )
                         </li>
                     }
 
