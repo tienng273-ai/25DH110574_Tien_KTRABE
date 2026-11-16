@@ -1,0 +1,118 @@
+﻿@model _25DH110574_Tien_KTRABE.Models.Customer
+
+@{
+    ViewBag.Title = "Chỉnh sửa tài khoản";
+}
+
+<div class="container mt-5">
+
+    <div class="row justify-content-center">
+
+        <div class="col-md-6">
+
+            <div class="card">
+
+                <div class="card-body">
+
+                    <h2 class="text-center mb-4">
+                        Chỉnh sửa tài khoản
+                    </h2>
+
+                    @if (ViewBag.Error != null)
+                    {
+                        <div class="alert alert-danger">
+                            @ViewBag.Error
+                        </div>
+                    }
+
+                    @if (ViewBag.Success != null)
+                    {
+                        <div class="alert alert-success">
+                            @ViewBag.Success
+                        </div>
+                    }
+
+                    <form method="post"
+                          action="@Url.Action("Edit", "Account")">
+
+                        <div class="mb-3">
+                            <label class="form-label">
+                                Tên đăng nhập
+                            </label>
+
+                            <input type="text"
+                                   class="form-control"
+                                   value="@Model.Username"
+                                   readonly />
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label">
+                                Họ tên *
+                            </label>
+
+                            <input type="text"
+                                   name="customerName"
+                                   class="form-control"
+                                   value="@Model.CustomerName"
+                                   required />
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label">
+                                Số điện thoại *
+                            </label>
+
+                            <input type="text"
+                                   name="customerPhone"
+                                   class="form-control"
+                                   value="@Model.CustomerPhone"
+                                   required />
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label">
+                                Email
+                            </label>
+
+                            <input type="email"
+                                   name="customerEmail"
+                                   class="form-control"
+                                   value="@Model.CustomerEmail" />
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label">
+                                Địa chỉ
+                            </label>
+
+                            <textarea name="customerAddress"
+                                      class="form-control"
+                                      rows="3">@Model.CustomerAddress</textarea>
+                        </div>
+
+                        <button type="submit"
+                                class="btn btn-primary w-100">
+                            Lưu thay đổi
+                        </button>
+
+                    </form>
+
+                    <div class="text-center mt-3">
+
+                        <a href="@Url.Action("Index", "Home")"
+                           class="btn btn-secondary">
+                            Quay lại Home
+                        </a>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>

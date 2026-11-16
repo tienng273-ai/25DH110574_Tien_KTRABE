@@ -1,33 +1,710 @@
-﻿@{
-    ViewBag.Title = "Home Page";
+﻿@model IEnumerable<_25DH110574_Tien_KTRABE.Models.Product>
+
+@{
+    ViewBag.Title = "Trang chủ";
 }
 
-<main>
-    <section class="row" aria-labelledby="aspnetTitle">
-        <h1 id="title">ASP.NET</h1>
-        <p class="lead">ASP.NET is a free web framework for building great Web sites and Web applications using HTML, CSS and JavaScript.</p>
-        <p><a href="https://asp.net" class="btn btn-primary btn-md">Learn more &raquo;</a></p>
-    </section>
+<style>
+    /* =========================
+       MYSTORE PREMIUM HOME
+       ========================= */
 
-    <div class="row">
-        <section class="col-md-4" aria-labelledby="gettingStartedTitle">
-            <h2 id="gettingStartedTitle">Getting started</h2>
-            <p>
-                ASP.NET MVC gives you a powerful, patterns-based way to build dynamic websites that
-                enables a clean separation of concerns and gives you full control over markup
-                for enjoyable, agile development.
-            </p>
-            <p><a class="btn btn-outline-dark" href="https://go.microsoft.com/fwlink/?LinkId=301865">Learn more &raquo;</a></p>
-        </section>
-        <section class="col-md-4" aria-labelledby="librariesTitle">
-            <h2 id="librariesTitle">Get more libraries</h2>
-            <p>NuGet is a free Visual Studio extension that makes it easy to add, remove, and update libraries and tools in Visual Studio projects.</p>
-            <p><a class="btn btn-outline-dark" href="https://go.microsoft.com/fwlink/?LinkId=301866">Learn more &raquo;</a></p>
-        </section>
-        <section class="col-md-4" aria-labelledby="hostingTitle">
-            <h2 id="hostingTitle">Web Hosting</h2>
-            <p>You can easily find a web hosting company that offers the right mix of features and price for your applications.</p>
-            <p><a class="btn btn-outline-dark" href="https://go.microsoft.com/fwlink/?LinkId=301867">Learn more &raquo;</a></p>
-        </section>
+    .ms-home {
+        background: #f6f8fc;
+        margin-left: -15px;
+        margin-right: -15px;
+        padding-bottom: 60px;
+    }
+
+    /* HERO */
+    .ms-hero {
+        min-height: 390px;
+        padding: 55px 50px;
+        color: white;
+        background:
+            radial-gradient(circle at 85% 20%, rgba(255,255,255,.18), transparent 25%),
+            radial-gradient(circle at 70% 100%, rgba(255,255,255,.12), transparent 30%),
+            linear-gradient(135deg, #0b5ed7, #6610f2);
+        position: relative;
+        overflow: hidden;
+    }
+
+    .ms-hero:after {
+        content: "";
+        position: absolute;
+        width: 420px;
+        height: 420px;
+        border: 70px solid rgba(255,255,255,.06);
+        border-radius: 50%;
+        right: -100px;
+        top: -170px;
+    }
+
+    .ms-hero-content {
+        position: relative;
+        z-index: 2;
+    }
+
+    .ms-badge {
+        display: inline-block;
+        background: rgba(255,255,255,.16);
+        border: 1px solid rgba(255,255,255,.25);
+        padding: 7px 15px;
+        border-radius: 30px;
+        font-size: 13px;
+        font-weight: 600;
+        margin-bottom: 18px;
+    }
+
+    .ms-hero h1 {
+        font-size: 46px;
+        line-height: 1.15;
+        font-weight: 800;
+        margin: 0 0 18px;
+    }
+
+    .ms-hero p {
+        font-size: 18px;
+        line-height: 1.7;
+        max-width: 600px;
+        opacity: .92;
+        margin-bottom: 25px;
+    }
+
+    .ms-hero-buttons a {
+        display: inline-block;
+        padding: 13px 23px;
+        border-radius: 10px;
+        text-decoration: none;
+        font-weight: 700;
+        margin-right: 8px;
+        transition: .2s;
+    }
+
+    .ms-btn-white {
+        background: white;
+        color: #0d6efd;
+    }
+
+    .ms-btn-white:hover {
+        transform: translateY(-2px);
+        color: #0d6efd;
+    }
+
+    .ms-btn-outline {
+        border: 1px solid rgba(255,255,255,.7);
+        color: white;
+    }
+
+    .ms-btn-outline:hover {
+        background: white;
+        color: #0d6efd;
+    }
+
+    .ms-hero-product {
+        position: relative;
+        z-index: 2;
+        text-align: center;
+        font-size: 145px;
+        padding-top: 50px;
+    }
+
+    /* BENEFITS */
+    .ms-benefits {
+        background: white;
+        padding: 20px 10px;
+        box-shadow: 0 4px 20px rgba(0,0,0,.06);
+    }
+
+    .ms-benefit {
+        text-align: center;
+        padding: 12px;
+        border-right: 1px solid #eee;
+    }
+
+    .ms-benefit:last-child {
+        border-right: none;
+    }
+
+    .ms-benefit-icon {
+        font-size: 28px;
+        margin-bottom: 5px;
+    }
+
+    .ms-benefit strong {
+        display: block;
+        font-size: 14px;
+    }
+
+    .ms-benefit span {
+        color: #777;
+        font-size: 12px;
+    }
+
+    /* SECTION */
+    .ms-section {
+        padding: 45px 15px 10px;
+    }
+
+    .ms-section-head {
+        display: flex;
+        justify-content: space-between;
+        align-items: end;
+        margin-bottom: 25px;
+    }
+
+    .ms-section-head h2 {
+        font-size: 28px;
+        font-weight: 800;
+        margin: 0 0 5px;
+    }
+
+    .ms-section-head p {
+        color: #777;
+        margin: 0;
+    }
+
+    .ms-section-label {
+        color: #0d6efd;
+        font-size: 12px;
+        font-weight: 800;
+        letter-spacing: 1.5px;
+        text-transform: uppercase;
+    }
+
+    /* CATEGORY */
+    .ms-category {
+        background: white;
+        border-radius: 15px;
+        padding: 25px 15px;
+        text-align: center;
+        border: 1px solid #eee;
+        transition: .25s;
+        height: 100%;
+    }
+
+    .ms-category:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 12px 25px rgba(0,0,0,.09);
+    }
+
+    .ms-category-icon {
+        width: 65px;
+        height: 65px;
+        margin: auto;
+        border-radius: 50%;
+        background: #eef4ff;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 30px;
+        margin-bottom: 12px;
+    }
+
+    .ms-category h4 {
+        font-size: 16px;
+        font-weight: 700;
+        margin: 0;
+    }
+
+    .ms-category p {
+        color: #888;
+        font-size: 12px;
+        margin: 5px 0 0;
+    }
+
+    /* PRODUCT */
+    .ms-product {
+        background: white;
+        border-radius: 16px;
+        overflow: hidden;
+        border: 1px solid #e9edf3;
+        height: 100%;
+        position: relative;
+        transition: .25s;
+    }
+
+    .ms-product:hover {
+        transform: translateY(-7px);
+        box-shadow: 0 16px 35px rgba(0,0,0,.12);
+    }
+
+    .ms-product-image {
+        height: 230px;
+        background: linear-gradient(135deg, #fafbfe, #f0f3f8);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 18px;
+        position: relative;
+    }
+
+    .ms-product-image img {
+        max-width: 100%;
+        max-height: 195px;
+        width: auto;
+        height: auto;
+        object-fit: contain;
+        transition: .3s;
+    }
+
+    .ms-product:hover .ms-product-image img {
+        transform: scale(1.07);
+    }
+
+    .ms-product-tag {
+        position: absolute;
+        top: 12px;
+        left: 12px;
+        background: #dc3545;
+        color: white;
+        font-size: 10px;
+        font-weight: 800;
+        padding: 5px 9px;
+        border-radius: 5px;
+        z-index: 3;
+    }
+
+    .ms-product-info {
+        padding: 18px;
+    }
+
+    .ms-product-category {
+        color: #0d6efd;
+        font-size: 11px;
+        font-weight: 700;
+        text-transform: uppercase;
+        margin-bottom: 7px;
+    }
+
+    .ms-product-name {
+        font-size: 17px;
+        font-weight: 700;
+        min-height: 42px;
+        margin-bottom: 8px;
+        color: #20242a;
+    }
+
+    .ms-stars {
+        color: #ffc107;
+        font-size: 13px;
+        margin-bottom: 8px;
+    }
+
+    .ms-price {
+        color: #dc3545;
+        font-size: 20px;
+        font-weight: 800;
+    }
+
+    .ms-stock {
+        color: #777;
+        font-size: 12px;
+        margin: 5px 0 15px;
+    }
+
+    .ms-cart-btn {
+        display: block;
+        width: 100%;
+        text-align: center;
+        padding: 10px;
+        border-radius: 9px;
+        background: #0d6efd;
+        color: white;
+        text-decoration: none;
+        font-weight: 700;
+        transition: .2s;
+    }
+
+    .ms-cart-btn:hover {
+        background: #0b5ed7;
+        color: white;
+    }
+
+    .ms-detail-btn {
+        display: block;
+        width: 100%;
+        text-align: center;
+        padding: 9px;
+        border-radius: 9px;
+        border: 1px solid #dee2e6;
+        color: #495057;
+        text-decoration: none;
+        font-weight: 600;
+        margin-bottom: 8px;
+        transition: .2s;
+    }
+
+    .ms-detail-btn:hover {
+        border-color: #0d6efd;
+        color: #0d6efd;
+    }
+
+    /* CTA */
+    .ms-cta {
+        margin: 45px 15px 0;
+        padding: 38px;
+        border-radius: 18px;
+        background: linear-gradient(135deg, #111827, #343a40);
+        color: white;
+    }
+
+    .ms-cta h2 {
+        font-weight: 800;
+        margin-top: 0;
+    }
+
+    .ms-cta p {
+        color: #cbd1d8;
+        margin-bottom: 0;
+    }
+
+    /* RESPONSIVE */
+    @@media (max-width: 768px) {
+        .ms-hero {
+            padding: 35px 25px;
+        }
+
+        .ms-hero h1 {
+            font-size: 32px;
+        }
+
+        .ms-hero-product {
+            display: none;
+        }
+
+        .ms-benefit {
+            border-right: none;
+            border-bottom: 1px solid #eee;
+        }
+
+        .ms-section-head {
+            display: block;
+        }
+    }
+</style>
+
+
+<div class="ms-home">
+
+    <!-- ================= BENEFITS ================= -->
+
+    <div class="ms-benefits">
+
+        <div class="container">
+
+            <div class="row">
+
+                <div class="col-md-3 col-sm-6 ms-benefit">
+                    <div class="ms-benefit-icon">🚚</div>
+                    <strong>Giao hàng nhanh</strong>
+                    <span>Đóng gói cẩn thận</span>
+                </div>
+
+                <div class="col-md-3 col-sm-6 ms-benefit">
+                    <div class="ms-benefit-icon">🛡️</div>
+                    <strong>Sản phẩm chất lượng</strong>
+                    <span>Kiểm tra trước khi giao</span>
+                </div>
+
+                <div class="col-md-3 col-sm-6 ms-benefit">
+                    <div class="ms-benefit-icon">💳</div>
+                    <strong>Thanh toán dễ dàng</strong>
+                    <span>Quy trình đơn giản</span>
+                </div>
+
+                <div class="col-md-3 col-sm-6 ms-benefit">
+                    <div class="ms-benefit-icon">💬</div>
+                    <strong>Hỗ trợ khách hàng</strong>
+                    <span>Luôn sẵn sàng hỗ trợ</span>
+                </div>
+
+            </div>
+
+        </div>
+
     </div>
-</main>
+
+
+    <!-- ================= CATEGORY ================= -->
+
+    <div class="container ms-section">
+
+        <div class="ms-section-head">
+
+            <div>
+                <div class="ms-section-label">
+                    Explore
+                </div>
+
+                <h2>Danh mục nổi bật</h2>
+
+                <p>
+                    Tìm nhanh sản phẩm bạn đang cần
+                </p>
+            </div>
+
+        </div>
+
+        <div class="row">
+
+            <!-- TAI NGHE -->
+            <div class="col-md-3 col-sm-6" style="margin-bottom:20px;">
+                <a href="@Url.Action("Index", "Home", new { category = "tainghe" })"
+                   style="text-decoration:none; color:inherit;">
+
+                    <div class="ms-category">
+                        <div class="ms-category-icon">🎧</div>
+                        <h4>Tai nghe</h4>
+                        <p>Bluetooth & có dây</p>
+                    </div>
+
+                </a>
+            </div>
+
+
+            <!-- SAC & PIN -->
+            <div class="col-md-3 col-sm-6" style="margin-bottom:20px;">
+                <a href="@Url.Action("Index", "Home", new { category = "sacpin" })"
+                   style="text-decoration:none; color:inherit;">
+
+                    <div class="ms-category">
+                        <div class="ms-category-icon">🔋</div>
+                        <h4>Sạc & Pin</h4>
+                        <p>Sạc nhanh & dự phòng</p>
+                    </div>
+
+                </a>
+            </div>
+
+
+            <!-- CAP SAC -->
+            <div class="col-md-3 col-sm-6" style="margin-bottom:20px;">
+                <a href="@Url.Action("Index", "Home", new { category = "capsac" })"
+                   style="text-decoration:none; color:inherit;">
+
+                    <div class="ms-category">
+                        <div class="ms-category-icon">🔌</div>
+                        <h4>Cáp sạc</h4>
+                        <p>Type-C, Lightning</p>
+                    </div>
+
+                </a>
+            </div>
+
+
+            <!-- DIEN THOAI -->
+            <div class="col-md-3 col-sm-6" style="margin-bottom:20px;">
+                <a href="@Url.Action("Index", "Home", new { category = "dienthoai" })"
+                   style="text-decoration:none; color:inherit;">
+
+                    <div class="ms-category">
+                        <div class="ms-category-icon">📱</div>
+                        <h4>Điện thoại</h4>
+                        <p>Thiết bị mới nhất</p>
+                    </div>
+
+                </a>
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- ================= PRODUCTS ================= -->
+
+    <div class="container ms-section" id="products">
+
+        <div class="ms-section-head">
+
+            <div>
+                <div class="ms-section-label">
+                    Best Seller
+                </div>
+
+                <h2>Sản phẩm nổi bật</h2>
+
+                <p>
+                    Những sản phẩm đang được quan tâm
+                </p>
+            </div>
+
+            <div>
+                <span class="badge bg-primary"
+                      style="padding:9px 13px;">
+                    @Model.Count() sản phẩm
+                </span>
+            </div>
+
+        </div>
+
+
+        @if (Model != null && Model.Any())
+        {
+            <div class="row">
+
+                @foreach (var product in Model)
+                {
+                    <div class="col-lg-3 col-md-4 col-sm-6"
+                         style="margin-bottom:25px;">
+
+                        <div class="ms-product">
+
+                            <div class="ms-product-image">
+
+                                @if (product.ProductID % 3 == 0)
+                                {
+                                    <span class="ms-product-tag">
+                                        HOT
+                                    </span>
+                                }
+                                else if (product.ProductID % 3 == 1)
+                                {
+                                    <span class="ms-product-tag"
+                                          style="background:#198754;">
+                                        MỚI
+                                    </span>
+                                }
+
+                                @if (!string.IsNullOrEmpty(product.ProductImage))
+                                {
+                                    <img src="@Url.Content(product.ProductImage)"
+                                         alt="@product.ProductName" />
+                                }
+                                else
+                                {
+                                    <span style="color:#999;">
+                                        Không có ảnh
+                                    </span>
+                                }
+
+                            </div>
+
+
+                            <div class="ms-product-info">
+
+                                <div class="ms-product-category">
+                                    Công nghệ
+                                </div>
+
+                                <div class="ms-product-name">
+                                    @product.ProductName
+                                </div>
+
+                                <div class="ms-stars">
+                                    ★★★★★
+                                    <span style="color:#999;">
+                                        (Đánh giá tốt)
+                                    </span>
+                                </div>
+
+                                <div class="ms-price">
+                                    @product.ProductPrice.ToString("N0") VNĐ
+                                </div>
+
+                                <div class="ms-stock">
+
+                                    @if (product.Quantity > 0)
+                                    {
+                                        <span>
+                                            ✓ Còn @product.Quantity sản phẩm
+                                        </span>
+                                    }
+                                    else
+                                    {
+                                        <span style="color:#dc3545;">
+                                            ✕ Hết hàng
+                                        </span>
+                                    }
+
+                                </div>
+
+
+                                <a href="@Url.Action("ProductDetail", "Customer",
+                                          new { id = product.ProductID })"
+                                   class="ms-detail-btn">
+                                    Xem chi tiết
+                                </a>
+
+
+                                @if (product.Quantity > 0)
+                                {
+                                    <a href="@Url.Action("Add", "Cart",
+                                              new { id = product.ProductID })"
+                                       class="ms-cart-btn">
+                                        🛒 Thêm vào giỏ
+                                    </a>
+                                }
+                                else
+                                {
+                                    <a href="#"
+                                       class="ms-cart-btn"
+                                       style="background:#adb5bd;">
+                                        Hết hàng
+                                    </a>
+                                }
+
+                            </div>
+
+                        </div>
+
+                    </div>
+                }
+
+            </div>
+        }
+        else
+        {
+            <div class="text-center"
+                 style="background:white;padding:50px;border-radius:16px;">
+                <h3>Chưa có sản phẩm</h3>
+                <p class="text-muted">
+                    Hiện tại cửa hàng chưa có sản phẩm.
+                </p>
+            </div>
+        }
+
+    </div>
+
+
+    <!-- ================= CTA ================= -->
+
+    <div class="container">
+
+        <div class="ms-cta">
+
+            <div class="row align-items-center">
+
+                <div class="col-md-8">
+
+                    <h2>
+                        Sẵn sàng nâng cấp trải nghiệm? 🚀
+                    </h2>
+
+                    <p>
+                        Chọn sản phẩm yêu thích và bắt đầu mua sắm
+                        ngay hôm nay.
+                    </p>
+
+                </div>
+
+                <div class="col-md-4 text-right">
+
+                    <a href="#products"
+                       class="btn btn-light"
+                       style="font-weight:700;
+                              padding:12px 22px;
+                              border-radius:9px;">
+                        Khám phá sản phẩm
+                    </a>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>

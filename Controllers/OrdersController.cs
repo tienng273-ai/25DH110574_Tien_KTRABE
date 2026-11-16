@@ -10,11 +10,25 @@ namespace _25DH110574_Tien_KTRABE.Controllers
         private MyStoreEntities1 db = new MyStoreEntities1();
 
         // GET: Orders
-        public ActionResult Index(string customerName, string paymentStatus, DateTime? orderDate, int page = 1)
+        public ActionResult Index(
+            string customerName,
+            string paymentStatus,
+            DateTime? orderDate,
+            int page = 1)
         {
+            // Chỉ Admin được vào
+            if (Session["Username"] == null ||
+                Session["UserRole"] == null ||
+                Session["UserRole"].ToString() != "A")
+            {
+                return RedirectToAction("Login", "Account");
+            }
+
             int pageSize = 15;
 
-            var orders = db.Orders.Include("Customer").AsQueryable();
+            var orders = db.Orders
+                .Include("Customer")
+                .AsQueryable();
 
             // Tìm theo tên khách hàng
             if (!string.IsNullOrWhiteSpace(customerName))
@@ -42,20 +56,17 @@ namespace _25DH110574_Tien_KTRABE.Controllers
                     o.OrderDate < toDate);
             }
 
-            // Tổng số đơn sau khi tìm kiếm
             int totalOrders = orders.Count();
 
-            // Tổng số trang
-            int totalPages = (int)Math.Ceiling((double)totalOrders / pageSize);
+            int totalPages =
+                (int)Math.Ceiling((double)totalOrders / pageSize);
 
-            // Đảm bảo page không vượt quá số trang
             if (page < 1)
                 page = 1;
 
             if (totalPages > 0 && page > totalPages)
                 page = totalPages;
 
-            // Lấy 15 đơn của trang hiện tại
             var result = orders
                 .OrderByDescending(o => o.OrderDate)
                 .Skip((page - 1) * pageSize)
@@ -70,8 +81,18 @@ namespace _25DH110574_Tien_KTRABE.Controllers
 
             return View(result);
         }
+
+        // Chi tiết đơn hàng
         public ActionResult DetailedOrder(int? id)
         {
+            // Chỉ Admin được vào
+            if (Session["Username"] == null ||
+                Session["UserRole"] == null ||
+                Session["UserRole"].ToString() != "A")
+            {
+                return RedirectToAction("Login", "Account");
+            }
+
             if (!id.HasValue)
             {
                 return RedirectToAction("Index");
@@ -90,9 +111,18 @@ namespace _25DH110574_Tien_KTRABE.Controllers
             return View(order);
         }
 
+        // Cập nhật trạng thái
         [HttpPost]
         public ActionResult UpdateStatus(int id, string paymentStatus)
         {
+            // Chỉ Admin được cập nhật
+            if (Session["Username"] == null ||
+                Session["UserRole"] == null ||
+                Session["UserRole"].ToString() != "A")
+            {
+                return RedirectToAction("Login", "Account");
+            }
+
             var order = db.Orders.Find(id);
 
             if (order == null)
@@ -104,7 +134,9 @@ namespace _25DH110574_Tien_KTRABE.Controllers
 
             db.SaveChanges();
 
-            return RedirectToAction("DetailedOrder", new { id = id });
+            return RedirectToAction(
+                "DetailedOrder",
+                new { id = id });
         }
     }
 }

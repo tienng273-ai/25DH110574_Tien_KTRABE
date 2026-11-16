@@ -1,20 +1,316 @@
-﻿/* Set padding to keep content from hitting the edges */
+﻿/* =========================================================
+   MYSTORE - GLOBAL STYLE
+   ========================================================= */
+
+html,
+body {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background: #f5f7fb;
+    color: #1f2937;
+    font-family: "Segoe UI", Arial, sans-serif;
+}
+
+/* =========================================================
+   NAVBAR
+   ========================================================= */
+
+.navbar {
+    background: linear-gradient(135deg, #0f172a, #1e1b4b, #4f46e5) !important;
+    border: none !important;
+    min-height: 72px;
+    box-shadow: 0 6px 25px rgba(30, 41, 59, 0.22);
+}
+
+    .navbar .container {
+        min-height: 72px;
+    }
+
+.navbar-brand {
+    color: white !important;
+    font-size: 28px !important;
+    font-weight: 800 !important;
+    letter-spacing: -0.5px;
+    padding-top: 20px !important;
+    padding-bottom: 20px !important;
+}
+
+    .navbar-brand:hover {
+        color: #c4b5fd !important;
+    }
+
+.navbar .nav-link {
+    color: #dbeafe !important;
+    font-size: 16px;
+    font-weight: 600;
+    padding: 25px 16px !important;
+    transition: all 0.25s ease;
+}
+
+    .navbar .nav-link:hover {
+        color: white !important;
+        background: rgba(255,255,255,0.10);
+    }
+
+/* =========================================================
+   BODY
+   ========================================================= */
+
 .body-content {
-    margin-top: 15px;
+    margin-top: 25px;
     padding-left: 15px;
     padding-right: 15px;
+    min-height: 70vh;
 }
 
-/* Override the default bootstrap behavior where horizontal description lists 
-   will truncate terms that are too long to fit in the left column 
-*/
-.dl-horizontal dt {
-    white-space: normal;
+/* =========================================================
+   SECTION
+   ========================================================= */
+
+.ms-section {
+    background: #ffffff;
+    border-radius: 24px;
+    padding: 45px 35px;
+    margin-top: 30px;
+    margin-bottom: 30px;
+    box-shadow: 0 12px 40px rgba(15, 23, 42, 0.08);
 }
 
-/* Set width on the form input elements since they're 100% wide by default */
+.ms-section-label {
+    color: #4f46e5;
+    font-size: 14px;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    margin-bottom: 8px;
+}
+
+.ms-section-head h2 {
+    font-size: 36px;
+    font-weight: 800;
+    color: #111827;
+    margin: 0 0 8px 0;
+}
+
+.ms-section-head p {
+    color: #64748b;
+    font-size: 18px;
+}
+
+/* =========================================================
+   CATEGORY
+   ========================================================= */
+
+.ms-category {
+    background: white;
+    border: 1px solid #e5e7eb;
+    border-radius: 22px;
+    padding: 32px 20px;
+    text-align: center;
+    min-height: 230px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 5px 20px rgba(15,23,42,0.05);
+}
+
+    .ms-category:hover {
+        transform: translateY(-8px);
+        border-color: #818cf8;
+        box-shadow: 0 20px 40px rgba(79,70,229,0.18);
+    }
+
+.ms-category-icon {
+    width: 76px;
+    height: 76px;
+    margin: 0 auto 20px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #eef2ff, #ddd6fe);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 36px;
+}
+
+.ms-category h4 {
+    font-size: 21px;
+    font-weight: 700;
+    color: #111827;
+    margin-bottom: 8px;
+}
+
+.ms-category p {
+    color: #64748b;
+    font-size: 15px;
+}
+
+/* =========================================================
+   PRODUCT CARD
+   ========================================================= */
+
+.product-card,
+.ms-product-card {
+    background: white;
+    border: 1px solid #e5e7eb;
+    border-radius: 20px;
+    overflow: hidden;
+    height: 100%;
+    box-shadow: 0 6px 20px rgba(15,23,42,0.06);
+    transition: all 0.3s ease;
+}
+
+    .product-card:hover,
+    .ms-product-card:hover {
+        transform: translateY(-7px);
+        box-shadow: 0 20px 40px rgba(15,23,42,0.14);
+    }
+
+.product-image-box {
+    height: 240px;
+    background: linear-gradient(145deg, #f8fafc, #eef2ff);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+}
+
+.product-image {
+    max-width: 100%;
+    max-height: 210px;
+    object-fit: contain;
+    transition: transform 0.3s ease;
+}
+
+.product-card:hover .product-image {
+    transform: scale(1.07);
+}
+
+.product-card .card-body {
+    padding: 20px;
+}
+
+.product-name {
+    font-size: 18px;
+    font-weight: 700;
+    min-height: 45px;
+    color: #111827;
+}
+
+.product-price {
+    color: #ef4444;
+    font-size: 20px;
+    font-weight: 800;
+    margin: 12px 0;
+}
+
+.product-stock {
+    color: #64748b;
+    font-size: 14px;
+}
+
+/* =========================================================
+   BUTTON
+   ========================================================= */
+
+.btn {
+    border-radius: 10px !important;
+    transition: all 0.25s ease;
+}
+
+.btn-primary {
+    background: linear-gradient(135deg, #4f46e5, #7c3aed) !important;
+    border: none !important;
+    color: white !important;
+    font-weight: 700;
+    box-shadow: 0 6px 16px rgba(79,70,229,0.22);
+}
+
+    .btn-primary:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 10px 25px rgba(79,70,229,0.32);
+    }
+
+.btn-success {
+    font-weight: 700;
+}
+
+/* =========================================================
+   FORM
+   ========================================================= */
+
 input,
 select,
 textarea {
-    max-width: 280px;
+    max-width: 100%;
+    border-radius: 10px !important;
+}
+
+.form-control {
+    border: 1px solid #dbe1ea;
+    min-height: 42px;
+    box-shadow: none;
+}
+
+    .form-control:focus {
+        border-color: #6366f1;
+        box-shadow: 0 0 0 3px rgba(99,102,241,0.12);
+    }
+
+/* =========================================================
+   CARD / TABLE
+   ========================================================= */
+
+.card {
+    border: none;
+    border-radius: 16px;
+    box-shadow: 0 6px 20px rgba(15,23,42,0.07);
+}
+
+.table {
+    background: white;
+}
+
+/* =========================================================
+   FOOTER
+   ========================================================= */
+
+footer {
+    margin-top: 45px;
+    padding: 25px 0;
+    color: #64748b;
+    text-align: center;
+    border-top: 1px solid #e5e7eb;
+}
+
+/* =========================================================
+   MOBILE
+   ========================================================= */
+
+@media (max-width: 768px) {
+
+    .navbar-brand {
+        font-size: 23px !important;
+    }
+
+    .navbar .nav-link {
+        padding: 12px 15px !important;
+    }
+
+    .ms-section {
+        padding: 30px 18px;
+    }
+
+    .ms-section-head h2 {
+        font-size: 29px;
+    }
+
+    .ms-category {
+        margin-bottom: 15px;
+    }
+
+    .product-image-box {
+        height: 210px;
+    }
 }

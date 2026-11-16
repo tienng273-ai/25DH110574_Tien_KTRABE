@@ -1,0 +1,96 @@
+﻿@model _25DH110574_Tien_KTRABE.Models.Product
+
+@{
+    ViewBag.Title = "Thêm sản phẩm";
+}
+
+<div class="container mt-4">
+
+    <h2>THÊM SẢN PHẨM</h2>
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-group mb-3">
+            @Html.LabelFor(model => model.ProductName, "Tên sản phẩm")
+            @Html.TextBoxFor(
+                     model => model.ProductName,
+                     new { @class = "form-control" }
+                 )
+            @Html.ValidationMessageFor(
+                     model => model.ProductName,
+                     "",
+                     new { @class = "text-danger" }
+                 )
+        </div>
+
+        <div class="form-group mb-3">
+            @Html.LabelFor(model => model.CategoryID, "Danh mục")
+
+            @Html.DropDownList(
+                     "CategoryID",
+                     null,
+                     "-- Chọn danh mục --",
+                     new { @class = "form-control" }
+                 )
+        </div>
+
+        <div class="form-group mb-3">
+            @Html.LabelFor(model => model.ProductPrice, "Giá sản phẩm")
+
+            @Html.TextBoxFor(
+                     model => model.ProductPrice,
+                     new
+                     {
+                         @class = "form-control",
+                         type = "number"
+                     }
+                 )
+        </div>
+
+        <div class="form-group mb-3">
+            @Html.LabelFor(model => model.Quantity, "Số lượng")
+
+            @Html.TextBoxFor(
+                     model => model.Quantity,
+                     new
+                     {
+                         @class = "form-control",
+                         type = "number"
+                     }
+                 )
+        </div>
+
+        <div class="form-group mb-3">
+            @Html.LabelFor(model => model.ProductImage, "Đường dẫn hình ảnh")
+
+            @Html.TextBoxFor(
+                     model => model.ProductImage,
+                     new { @class = "form-control" }
+                 )
+        </div>
+
+        <div class="form-group mb-3">
+            @Html.LabelFor(model => model.ProductDecription, "Mô tả")
+
+            @Html.TextAreaFor(
+                     model => model.ProductDecription,
+                     new
+                     {
+                         @class = "form-control",
+                         rows = 5
+                     }
+                 )
+        </div>
+
+        <button type="submit" class="btn btn-primary">
+            Thêm sản phẩm
+        </button>
+
+        <a href="@Url.Action("Index", "Product")"
+           class="btn btn-secondary">
+            Quay lại
+        </a>
+    }
+</div>
