@@ -46,7 +46,11 @@ namespace _25DH110574_Tien_KTRABE.Controllers
             // Lọc theo trạng thái nếu đang chọn một tab cụ thể
             if (!string.IsNullOrWhiteSpace(status))
             {
-                orders = orders.Where(o => o.PaymentStatus == status);
+                string statusFilter = status.Trim();
+
+                orders = orders.Where(o =>
+                    o.PaymentStatus != null &&
+                    o.PaymentStatus.Trim() == statusFilter);
             }
 
             orders = orders.OrderByDescending(o => o.OrderDate);
