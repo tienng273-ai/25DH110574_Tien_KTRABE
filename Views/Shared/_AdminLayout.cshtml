@@ -57,14 +57,41 @@
                                                       )
                     </li>
 
-                    <li class="nav-item">
-                        @Html.ActionLink(
-                                                    "Quản lý danh mục",
-                                                    "Index",
-                                                    "Category",
-                                                    new { },
-                                                    new { @class = "nav-link" }
-                                                )
+                    <li class="nav-item" style="position: relative;">
+                        <a href="javascript:void(0);"
+                           class="nav-link"
+                           onclick="toggleCategoryMenu()">
+                            Quản lý danh mục ▾
+                        </a>
+
+                        <ul id="categoryMenu"
+                            style="display:none;
+                                   position:absolute;
+                                   top:100%;
+                                   left:0;
+                                   background:white;
+                                   min-width:180px;
+                                   padding:8px 0;
+                                   margin:0;
+                                   list-style:none;
+                                   border:1px solid #ddd;
+                                   z-index:9999;">
+
+                            <li>
+                                @Html.ActionLink(
+                                    "Danh mục",
+                                    "Index",
+                                    "Category",
+                                    new { },
+                                    new
+                                         {
+                                        @class = "dropdown-item",
+                                        style = "display:block; padding:8px 15px; color:#333;"
+                                    }
+                                )
+                            </li>
+
+                        </ul>
                     </li>
 
                     <li>
@@ -153,6 +180,19 @@
 
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
+
+
+    <script>
+        function toggleCategoryMenu() {
+            var menu = document.getElementById("categoryMenu");
+
+            if (menu.style.display === "none") {
+                menu.style.display = "block";
+            } else {
+                menu.style.display = "none";
+            }
+        }
+    </script>
 
     @RenderSection("scripts", required: false)
 
