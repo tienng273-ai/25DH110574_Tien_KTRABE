@@ -531,6 +531,30 @@
             </div>
 
             <div>
+                <div style="margin-top:15px; margin-bottom:20px;">
+                    @using (Html.BeginForm("Index", "Home", FormMethod.Get))
+                    {
+                        <div style="display:flex; gap:10px; max-width:500px;">
+                            <input type="text"
+                                   name="search"
+                                   value="@ViewBag.Search"
+                                   class="form-control"
+                                   placeholder="Tìm kiếm sản phẩm..." />
+
+                            @if (!string.IsNullOrWhiteSpace(ViewBag.Category as string))
+                            {
+                                <input type="hidden"
+                                       name="category"
+                                       value="@ViewBag.Category" />
+                            }
+
+                            <button type="submit" class="btn btn-primary">
+                                🔍 Tìm kiếm
+                            </button>
+                        </div>
+                    }
+                </div>
+
                 <span class="badge bg-primary"
                       style="padding:9px 13px;">
                     @Model.Count() sản phẩm

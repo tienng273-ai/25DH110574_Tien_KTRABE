@@ -8,9 +8,16 @@ namespace _25DH110574_Tien_KTRABE.Controllers
     {
         private MyStoreEntities1 db = new MyStoreEntities1();
 
-        public ActionResult Index(string category)
+        public ActionResult Index(string category, string search)
         {
-            var products = db.Products.Include("Category").Where(p => p.Quantity > 0).AsQueryable();
+            var products = db.Products  .Include("Category") .Where(p => p.Quantity > 0).AsQueryable();
+
+            // Tìm kiếm sản phẩm theo tên
+            if (!string.IsNullOrWhiteSpace(search))
+            {
+                products = products.Where(p =>
+                    p.ProductName.Contains(search));
+            }
 
             // Lọc sản phẩm theo danh mục
             if (category == "tainghe")
@@ -40,6 +47,7 @@ namespace _25DH110574_Tien_KTRABE.Controllers
             }
 
             ViewBag.Category = category;
+            ViewBag.Search = search;
 
             return View(products.ToList());
         }
